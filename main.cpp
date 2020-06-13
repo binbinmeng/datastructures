@@ -1,5 +1,5 @@
 #include <iostream>
-#include "binarytree.hpp"
+#include "binarytree.h"
 
 void test_binarytree(){
     std::vector<std::string> values;
@@ -11,8 +11,9 @@ void test_binarytree(){
     values.push_back("F");
 
     BinaryTree<string> bt;
+    //StrBiTree bt;
     bt.createTree(values);
-    //bt.visitTree(VISIT_TYPE::pre_recursive);
+    bt.visitTree(VISIT_TYPE::pre_recursive);
 }
 int main() {
 

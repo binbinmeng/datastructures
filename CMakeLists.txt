@@ -3,4 +3,4 @@ project(algorithms)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(algorithms main.cpp binarytree.cpp binarytree.hpp)
+add_executable(algorithms main.cpp binarytree.cpp binarytree.h)

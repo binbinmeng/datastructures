@@ -16,8 +16,8 @@ using namespace std;
 template <class T>
 struct TreeNode{
     T value;
-    TreeNode* left;
-    TreeNode* right;
+    TreeNode<T>* left;
+    TreeNode<T>* right;
 };
 
 enum VISIT_TYPE{
@@ -47,5 +47,7 @@ private:
 
 };
 
+template class BinaryTree<string>;
+template class BinaryTree<int>;
 
 #endif //ALGORITHMS_BINARYTREE_HPP
