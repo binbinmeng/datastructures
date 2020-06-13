@@ -42,7 +42,11 @@ public:
 
     int getHight(TreeNode<T>* root);
 
-    void imageTree(TreeNode<T>* root);
+    void imageTree_recursive(TreeNode<T>* root);
+
+    void imageTree_unrecursive(TreeNode<T>* root);
+
+    void allPaths(std::vector<std::stack<TreeNode<T> *>>& paths);
 
 public:
     TreeNode<T>* root;
@@ -51,7 +55,8 @@ private:
     void inOrder_recursive(TreeNode<T>* root);
     void postOrder_recursive(TreeNode<T>* root);
     void level_unrecursive(TreeNode<T>* root);
-    void preOrder_unrecursive(TreeNode<T>* root);
+    void preOrder_unrecursive_method1(TreeNode<T>* root);
+    void preOrder_unrecursive_method2(TreeNode<T>* root);
     void inOrder_unrecursive(TreeNode<T>* root);
     void postOrder_unrecursive(TreeNode<T>* root);
 

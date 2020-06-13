@@ -33,7 +33,7 @@ bool BinaryTree<T>::createTree(const vector<T> &nodeValues, const T & empty_node
     queue<TreeNode<T>*> Q;
     Q.push(root);
 
-    while(index < nodeValues.size() - 2 ){ //父节点之后还会有两个节点要访问
+    while(index < nodeValues.size() - 1){
 
         TreeNode<T>* front_node = Q.front();
         std::cout<<index<<" || "<<front_node->value<<std::endl;
@@ -79,9 +79,13 @@ void BinaryTree<T>::visitTree(enum VISIT_TYPE type) {
         case 2:
             postOrder_recursive(root);
             break;
-        case 3:
-            preOrder_unrecursive(root);
+        case 3:{
+            std::cout<<"method1 :"<<std::endl;
+            preOrder_unrecursive_method1(root);
+            std::cout<<"method2 :"<<std::endl;
+            preOrder_unrecursive_method2(root);
             break;
+        }
         case 4:
             inOrder_unrecursive(root);
             break;
@@ -146,7 +150,7 @@ void BinaryTree<T>::level_unrecursive(TreeNode<T> *root) {
 }
 
 template <class T>
-void BinaryTree<T>::preOrder_unrecursive(TreeNode<T> *root) {
+void BinaryTree<T>::preOrder_unrecursive_method1(TreeNode<T> *root) {
     if(root == NULL)
         return;
     stack<TreeNode<T>*> S;
@@ -162,6 +166,28 @@ void BinaryTree<T>::preOrder_unrecursive(TreeNode<T> *root) {
         if(top_node->left)
             S.push(top_node->left);
 
+    }
+}
+template <class T>
+void BinaryTree<T>::preOrder_unrecursive_method2(TreeNode<T> *root) {
+    if(root == NULL)
+        return;
+    stack<TreeNode<T>*> S;
+    TreeNode<T>* current_node = root;
+
+    while(!S.empty()){
+
+        while(current_node != NULL){
+            S.push(current_node);
+            std::cout<<current_node->value<<std::endl;
+            current_node = current_node->left;
+        }
+
+        if(!S.empty()){
+            current_node = S.top();
+            S.pop();
+            current_node = current_node->right;
+        }
     }
 }
 
@@ -191,7 +217,7 @@ void BinaryTree<T>::inOrder_unrecursive(TreeNode<T> *root) {
                 S.push(make_pair(S.top().first->right, false));
             }
 
-            if((S.top().first->left&&S.top().first->right) == NULL){
+            if(S.top().first->left == NULL){
                 std::cout << S.top().first->value << std::endl;
                 S.pop();
             }
@@ -216,7 +242,71 @@ int BinaryTree<T>::getHight(TreeNode<T> *root) {
 }
 
 template <class T>
-void BinaryTree<T>::imageTree(TreeNode<T> *root) {
+void BinaryTree<T>::imageTree_recursive(TreeNode<T> *root) {
+    if(root == NULL)
+        return;
 
+    if(root->left || root->right){
+        swap(root->left, root->right);
+    }
+
+    imageTree_recursive(root->left);
+    imageTree_recursive(root->right);
 }
 
+template <class T>
+void BinaryTree<T>::imageTree_unrecursive(TreeNode<T> *root) {
+    if(root == NULL)
+        return;
+
+    queue<TreeNode<T>*> Q;
+    Q.push(root);
+
+    while(!Q.empty()){
+
+        TreeNode<T>* front_node = Q.front();
+        if(front_node){
+            if(front_node->left || front_node->right){
+                swap(front_node->left, front_node->right);
+                Q.push(front_node->left);
+                Q.push(front_node->right);
+            }
+        }
+        Q.pop();
+    }
+}
+
+template <class T>
+void BinaryTree<T>::allPaths(std::vector<std::stack<TreeNode<T> *>> &paths) {
+     if(root == NULL){
+         paths.clear();
+         return;
+     }
+
+    stack<TreeNode<T>*> S;
+    TreeNode<T>* current_node = root;
+
+    while(!S.empty()){
+
+        while(current_node != NULL){
+            S.push(current_node);
+            std::cout<<current_node->value<<std::endl;
+            current_node = current_node->left;
+        }
+
+        if(!S.empty()){
+            paths.push_back(S);
+            {
+                stack<TreeNode<T>*> S_copy = S;
+                std::cout<<S.size()<<std::endl;
+                while(!S_copy.empty())
+                    std::cout<<S_copy.top()->value<<" | "<<std::endl;
+                S_copy.pop();
+            }
+
+            current_node = S.top();
+            S.pop();
+            current_node = current_node->right;
+        }
+    }
+}

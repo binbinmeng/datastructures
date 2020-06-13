@@ -4,11 +4,14 @@
 void test_binarytree(){
     std::vector<std::string> values;
     values.push_back("A");
-    values.push_back("#");
+    //values.push_back("#");
     values.push_back("B");
     values.push_back("C");
+    //values.push_back("#");
     values.push_back("D");
+    //values.push_back("#");
     values.push_back("E");
+    //values.push_back("#");
     values.push_back("F");
 
     BinaryTree<string> bt;
@@ -32,7 +35,25 @@ void test_binarytree(){
     std::cout << "in order unrecursive visit !" << std::endl;
     bt.visitTree(VISIT_TYPE::in_unrecursive);
 
+    std::cout << "image tree by recursive:" << std::endl;
+    bt.imageTree_recursive(bt.root);
+    bt.visitTree(VISIT_TYPE::level_unrecursive);
+
+    std::cout << "image tree by unrecursive:" << std::endl;
+    bt.imageTree_unrecursive(bt.root);
+    bt.visitTree(VISIT_TYPE::level_unrecursive);
+
     std::cout << "binary tree height = "<<bt.getHight(bt.root) << std::endl;
+
+    std::vector<std::stack<TreeNode<std::string> *>> paths;
+    bt.allPaths(paths);
+
+    std::cout << "binary tree path = "<<paths.size() << std::endl;
+    for(int k = 0; k < paths.size(); ++k){
+        while(!paths[k].empty())
+            std::cout<<paths[k].top()->value<<" | "<<std::endl;
+        paths[k].pop();
+    }
 }
 int main() {
 
