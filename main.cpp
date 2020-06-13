@@ -4,6 +4,7 @@
 void test_binarytree(){
     std::vector<std::string> values;
     values.push_back("A");
+    values.push_back("#");
     values.push_back("B");
     values.push_back("C");
     values.push_back("D");
@@ -11,7 +12,8 @@ void test_binarytree(){
     values.push_back("F");
 
     BinaryTree<string> bt;
-    bt.createTree(values);
+    bt.createTree(values, "#");
+
     std::cout << "pre order recursive visit !" << std::endl;
     bt.visitTree(VISIT_TYPE::pre_recursive);
 
@@ -23,6 +25,12 @@ void test_binarytree(){
 
     std::cout << "level unrecursive visit !" << std::endl;
     bt.visitTree(VISIT_TYPE::level_unrecursive);
+
+    std::cout << "pre order unrecursive visit !" << std::endl;
+    bt.visitTree(VISIT_TYPE::pre_unrecursive);
+
+    std::cout << "in order unrecursive visit !" << std::endl;
+    bt.visitTree(VISIT_TYPE::in_unrecursive);
 
     std::cout << "binary tree height = "<<bt.getHight(bt.root) << std::endl;
 }

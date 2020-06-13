@@ -15,7 +15,7 @@ BinaryTree<T>::~BinaryTree(){
 }
 
 template <class T>
-bool BinaryTree<T>::createTree(const vector<T> &nodeValues) {
+bool BinaryTree<T>::createTree(const vector<T> &nodeValues, const T & empty_node_symbol) {
     /*
      * 利用层序遍历创建二叉树
      */
@@ -33,26 +33,37 @@ bool BinaryTree<T>::createTree(const vector<T> &nodeValues) {
     queue<TreeNode<T>*> Q;
     Q.push(root);
 
-    while(index < nodeValues.size()){
+    while(index < nodeValues.size() - 2 ){ //父节点之后还会有两个节点要访问
 
         TreeNode<T>* front_node = Q.front();
+        std::cout<<index<<" || "<<front_node->value<<std::endl;
 
         if(front_node != NULL){
-            front_node->left = new TreeNode<T>();//创建左节点对象
-            front_node->left->value = nodeValues[++index];
-            front_node->left->left = NULL;
-            front_node->left->right = NULL;
-            Q.push(front_node->left);//左节点入队
 
-            front_node->right = new TreeNode<T>();//创建右节点对象
-            front_node->right->value = nodeValues[++index];
-            front_node->right->left = NULL;
-            front_node->right->right = NULL;
-            Q.push(front_node->right);//右节点入队
+            T value_left = nodeValues[++index];
+            std::cout<<index<<" | "<<value_left <<std::endl;
+            if(value_left  != empty_node_symbol){
+                front_node->left = new TreeNode<T>();//创建左节点对象
+                front_node->left->value = value_left;
+                front_node->left->left = NULL;
+                front_node->left->right = NULL;
+                Q.push(front_node->left);//左节点入队
+            }
+
+            T value_right = nodeValues[++index];
+            std::cout<<index<<" | "<<value_right <<std::endl;
+            if(value_right != empty_node_symbol){
+                front_node->right = new TreeNode<T>();//创建右节点对象
+                front_node->right->value = value_right;
+                front_node->right->left = NULL;
+                front_node->right->right = NULL;
+                Q.push(front_node->right);//右节点入队
+            }
         }
-
         Q.pop();//队头，即root节点出队
     }
+
+    std::cout<<"create binary tree seccessfull !"<<std::endl;
     return true;
 }
 
@@ -69,10 +80,13 @@ void BinaryTree<T>::visitTree(enum VISIT_TYPE type) {
             postOrder_recursive(root);
             break;
         case 3:
+            preOrder_unrecursive(root);
             break;
         case 4:
+            inOrder_unrecursive(root);
             break;
         case 5:
+            postOrder_unrecursive(root);
             break;
         case 6:
             level_unrecursive(root);
@@ -121,11 +135,9 @@ void BinaryTree<T>::level_unrecursive(TreeNode<T> *root) {
         std::cout << front_node->value << std::endl;
 
         if (front_node->left) {
-            //std::cout << front_node->left->value << std::endl;
             Q.push(front_node->left);
         }
         if (front_node->right) {
-            //std::cout << front_node->right->value << std::endl;
             Q.push(front_node->right);
         }
 
@@ -135,12 +147,56 @@ void BinaryTree<T>::level_unrecursive(TreeNode<T> *root) {
 
 template <class T>
 void BinaryTree<T>::preOrder_unrecursive(TreeNode<T> *root) {
+    if(root == NULL)
+        return;
+    stack<TreeNode<T>*> S;
+    S.push(root);
 
+    while(!S.empty()){
+        TreeNode<T>* top_node = S.top();
+        std::cout << top_node->value << std::endl;
+        S.pop(); //访问完父节点，即可弹出栈
+
+        if(top_node->right)
+            S.push(top_node->right);
+        if(top_node->left)
+            S.push(top_node->left);
+
+    }
 }
 
 template <class T>
 void BinaryTree<T>::inOrder_unrecursive(TreeNode<T> *root) {
+    if(root == NULL)
+        return;
 
+    stack<pair<TreeNode<T>*, bool>> S;
+    S.push(std::make_pair(root, false));
+
+    while(!S.empty()){
+
+        if(S.top().second)
+        {
+            std::cout << S.top().first->value<< std::endl;
+            S.pop();
+
+        }
+        else{
+            S.top().second = true;
+
+            if(S.top().first->left){
+                S.push(make_pair(S.top().first->left, false));
+            }
+            if(S.top().first->right){
+                S.push(make_pair(S.top().first->right, false));
+            }
+
+            if((S.top().first->left&&S.top().first->right) == NULL){
+                std::cout << S.top().first->value << std::endl;
+                S.pop();
+            }
+        }
+    }
 }
 
 template <class T>

@@ -5,7 +5,7 @@
 #ifndef ALGORITHMS_BINARYTREE_HPP
 #define ALGORITHMS_BINARYTREE_HPP
 #include <iostream>
-#include "string"
+#include "string.h"
 #include "vector"
 #include "map"
 #include "queue"
@@ -36,7 +36,7 @@ public:
     BinaryTree();
     ~BinaryTree();
 
-    bool createTree(const vector<T> &nodeValues);
+    bool createTree(const vector<T> &nodeValues,const T & empty_node_symbol);
 
     void visitTree(enum VISIT_TYPE);
 
@@ -59,7 +59,7 @@ private:
 
 };
 
-template class BinaryTree<string>;
+template class BinaryTree<std::string>;
 template class BinaryTree<int>;
 
 #endif //ALGORITHMS_BINARYTREE_HPP
