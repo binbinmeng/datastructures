@@ -1,0 +1,34 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/binbinm/CLionProjects/datastructure_algorithm/binarytree.cpp
+binarytree.h
+/home/binbinm/CLionProjects/datastructure_algorithm/binarytree.h
+
+/home/binbinm/CLionProjects/datastructure_algorithm/binarytree.h
+iostream
+-
+string
+/home/binbinm/CLionProjects/datastructure_algorithm/string
+vector
+/home/binbinm/CLionProjects/datastructure_algorithm/vector
+map
+/home/binbinm/CLionProjects/datastructure_algorithm/map
+queue
+/home/binbinm/CLionProjects/datastructure_algorithm/queue
+stack
+/home/binbinm/CLionProjects/datastructure_algorithm/stack
+assert.h
+/home/binbinm/CLionProjects/datastructure_algorithm/assert.h
+
+/home/binbinm/CLionProjects/datastructure_algorithm/main.cpp
+iostream
+-
+binarytree.h
+/home/binbinm/CLionProjects/datastructure_algorithm/binarytree.h
+
