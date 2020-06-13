@@ -11,9 +11,20 @@ void test_binarytree(){
     values.push_back("F");
 
     BinaryTree<string> bt;
-    //StrBiTree bt;
     bt.createTree(values);
+    std::cout << "pre order recursive visit !" << std::endl;
     bt.visitTree(VISIT_TYPE::pre_recursive);
+
+    std::cout << "in order recursive visit !" << std::endl;
+    bt.visitTree(VISIT_TYPE::in_recursive);
+
+    std::cout << "post order recursive visit !" << std::endl;
+    bt.visitTree(VISIT_TYPE::post_recursive);
+
+    std::cout << "level unrecursive visit !" << std::endl;
+    bt.visitTree(VISIT_TYPE::level_unrecursive);
+
+    std::cout << "binary tree height = "<<bt.getHight(bt.root) << std::endl;
 }
 int main() {
 

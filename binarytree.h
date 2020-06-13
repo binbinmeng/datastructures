@@ -40,10 +40,22 @@ public:
 
     void visitTree(enum VISIT_TYPE);
 
-private:
-    TreeNode<T>* root;
+    int getHight(TreeNode<T>* root);
 
+    void imageTree(TreeNode<T>* root);
+
+public:
+    TreeNode<T>* root;
+private:
     void preOrder_recursive(TreeNode<T>* root);
+    void inOrder_recursive(TreeNode<T>* root);
+    void postOrder_recursive(TreeNode<T>* root);
+    void level_unrecursive(TreeNode<T>* root);
+    void preOrder_unrecursive(TreeNode<T>* root);
+    void inOrder_unrecursive(TreeNode<T>* root);
+    void postOrder_unrecursive(TreeNode<T>* root);
+
+
 
 };
 
