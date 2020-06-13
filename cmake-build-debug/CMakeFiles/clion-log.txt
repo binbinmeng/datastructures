@@ -1,4 +1,0 @@
-/home/binbinm/workspace/CLion-2020.1.1/clion-2020.1.1/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/binbinm/CLionProjects/datastructure_algorithm
--- Configuring done
--- Generating done
--- Build files have been written to: /home/binbinm/CLionProjects/datastructure_algorithm/cmake-build-debug
