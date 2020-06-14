@@ -10,6 +10,7 @@
 #include "map"
 #include "queue"
 #include "stack"
+#include <set>
 #include "assert.h"
 using namespace std;
 
@@ -42,11 +43,15 @@ public:
 
     int getHight(TreeNode<T>* root);
 
+    int getWidth(TreeNode<T>* root);
+
     void imageTree_recursive(TreeNode<T>* root);
 
     void imageTree_unrecursive(TreeNode<T>* root);
 
-    void allPaths(std::vector<std::stack<TreeNode<T> *>>& paths);
+    void allPaths(TreeNode<T> *root, std::vector<std::set<TreeNode<T> *>>& paths);
+
+    void allPaths_recursive(TreeNode<T> *root, stack<TreeNode<T>*> nodes);
 
 public:
     TreeNode<T>* root;
@@ -59,8 +64,6 @@ private:
     void preOrder_unrecursive_method2(TreeNode<T>* root);
     void inOrder_unrecursive(TreeNode<T>* root);
     void postOrder_unrecursive(TreeNode<T>* root);
-
-
 
 };
 

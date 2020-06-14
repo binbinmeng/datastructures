@@ -33,7 +33,7 @@ bool BinaryTree<T>::createTree(const vector<T> &nodeValues, const T & empty_node
     queue<TreeNode<T>*> Q;
     Q.push(root);
 
-    while(index < nodeValues.size() - 1){
+    while(index < nodeValues.size() - 2){
 
         TreeNode<T>* front_node = Q.front();
         std::cout<<index<<" || "<<front_node->value<<std::endl;
@@ -175,7 +175,7 @@ void BinaryTree<T>::preOrder_unrecursive_method2(TreeNode<T> *root) {
     stack<TreeNode<T>*> S;
     TreeNode<T>* current_node = root;
 
-    while(!S.empty()){
+    while(current_node != NULL || !S.empty()){
 
         while(current_node != NULL){
             S.push(current_node);
@@ -277,7 +277,7 @@ void BinaryTree<T>::imageTree_unrecursive(TreeNode<T> *root) {
 }
 
 template <class T>
-void BinaryTree<T>::allPaths(std::vector<std::stack<TreeNode<T> *>> &paths) {
+void BinaryTree<T>::allPaths(TreeNode<T> *root, std::vector<std::set<TreeNode<T> *>> &paths) {
      if(root == NULL){
          paths.clear();
          return;
@@ -286,27 +286,47 @@ void BinaryTree<T>::allPaths(std::vector<std::stack<TreeNode<T> *>> &paths) {
     stack<TreeNode<T>*> S;
     TreeNode<T>* current_node = root;
 
-    while(!S.empty()){
+    std::set<TreeNode<T>*> path;
+
+    while(current_node != NULL || !S.empty()){
 
         while(current_node != NULL){
             S.push(current_node);
-            std::cout<<current_node->value<<std::endl;
+
+            if(current_node->left == NULL && current_node->right == NULL){
+                stack<TreeNode<T>*> S_COPY = S;
+                while(!S_COPY.empty()){
+                    path.insert(S_COPY.top());
+                    S_COPY.pop();
+                }
+
+                paths.push_back(path);
+                path.clear();
+            }
             current_node = current_node->left;
         }
 
         if(!S.empty()){
-            paths.push_back(S);
-            {
-                stack<TreeNode<T>*> S_copy = S;
-                std::cout<<S.size()<<std::endl;
-                while(!S_copy.empty())
-                    std::cout<<S_copy.top()->value<<" | "<<std::endl;
-                S_copy.pop();
-            }
 
             current_node = S.top();
             S.pop();
             current_node = current_node->right;
+
+            if(!S.empty()) {
+                path.insert(S.top());
+            }
         }
     }
+}
+
+template <class T>
+void BinaryTree<T>::allPaths_recursive(TreeNode<T> *root, stack<TreeNode<T>*> nodes) {
+    if(root == NULL)
+        return;
+    //TO DO
+}
+
+template <class T>
+int BinaryTree<T>::getWidth(TreeNode<T> *root) {
+
 }

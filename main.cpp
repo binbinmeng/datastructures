@@ -1,5 +1,6 @@
 #include <iostream>
 #include "binarytree.h"
+#include "ndarray.h"
 
 void test_binarytree(){
     std::vector<std::string> values;
@@ -16,6 +17,7 @@ void test_binarytree(){
 
     BinaryTree<string> bt;
     bt.createTree(values, "#");
+
 
     std::cout << "pre order recursive visit !" << std::endl;
     bt.visitTree(VISIT_TYPE::pre_recursive);
@@ -45,19 +47,46 @@ void test_binarytree(){
 
     std::cout << "binary tree height = "<<bt.getHight(bt.root) << std::endl;
 
-    std::vector<std::stack<TreeNode<std::string> *>> paths;
-    bt.allPaths(paths);
+    std::vector<std::set<TreeNode<std::string> *>> paths;
+    bt.allPaths(bt.root, paths);
 
     std::cout << "binary tree path = "<<paths.size() << std::endl;
-    for(int k = 0; k < paths.size(); ++k){
-        while(!paths[k].empty())
-            std::cout<<paths[k].top()->value<<" | "<<std::endl;
-        paths[k].pop();
+    for(int k=0; k< paths.size(); ++k){
+        std::cout << "binary tree path "<<k<<":"<<std::endl ;
+        for(typename std::set<TreeNode<string>*>::iterator it=paths[k].begin(); it!=paths[k].end(); it++)
+        {
+            cout<<(*it)->value<<" | "<<endl;
+        }
     }
+
+    stack<TreeNode<string>*> nodes;
+    bt.allPaths_recursive(bt.root, nodes);
+    std::cout<<nodes.size()<<std::endl;
+
 }
+
+void test_ndarray(){
+    std::vector<std::vector<std::string>> vec_2d;
+    std::string A1[] = { "A","B","C","D","E"};
+    vec_2d.push_back(vector<std::string>(A1, A1+5));
+    std::string A2[] = { "F","G","H","I","J"};
+    vec_2d.push_back(vector<std::string>(A2, A2+5));
+    std::string A3[] = { "K","L","M","N","O"};
+    vec_2d.push_back(vector<std::string>(A3, A3+5));
+
+    std::cout<<"########"<<std::endl;
+    NDArray<std::string> array;
+    array.create(vec_2d);
+    array.print();
+
+
+}
+
 int main() {
 
-    test_binarytree();
+    //test_binarytree();
+
+    test_ndarray();
     std::cout << "Hello, World!" << std::endl;
     return 0;
 }
