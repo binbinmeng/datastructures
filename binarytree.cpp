@@ -19,52 +19,40 @@ bool BinaryTree<T>::createTree(const vector<T> &nodeValues, const T & empty_node
     /*
      * 利用层序遍历创建二叉树
      */
-    if(nodeValues.size() == 0){
-        assert(nodeValues.size() != 0);
+    if(nodeValues.empty()){
+        root = NULL;
         return false;
     }
 
-    root = new TreeNode<T>();//创建第一个root节点对象
+    root = new TreeNode<T>(nodeValues[0]);
+    std::queue<TreeNode<T> *> Q_nodes;
+    Q_nodes.push(root);
+
     int index = 0;
-    root->value = nodeValues[index];
-    root->left = NULL;
-    root->right = NULL;
+    while(!Q_nodes.empty() && index < nodeValues.size()){
 
-    queue<TreeNode<T>*> Q;
-    Q.push(root);
-
-    while(index < nodeValues.size() - 2){
-
-        TreeNode<T>* front_node = Q.front();
-        std::cout<<index<<" || "<<front_node->value<<std::endl;
-
-        if(front_node != NULL){
-
-            T value_left = nodeValues[++index];
-            std::cout<<index<<" | "<<value_left <<std::endl;
-            if(value_left  != empty_node_symbol){
-                front_node->left = new TreeNode<T>();//创建左节点对象
-                front_node->left->value = value_left;
-                front_node->left->left = NULL;
-                front_node->left->right = NULL;
-                Q.push(front_node->left);//左节点入队
+        TreeNode<T> * leaf = Q_nodes.front();
+        Q_nodes.pop();
+        index++;
+        if(leaf != NULL) {
+            if ((nodeValues[index] == empty_node_symbol) || index >= nodeValues.size()) { //  empty node and no data also means empty node
+                leaf->left = NULL;
+            } else {
+                leaf->left = new TreeNode<T>(nodeValues[index]);
             }
 
-            T value_right = nodeValues[++index];
-            std::cout<<index<<" | "<<value_right <<std::endl;
-            if(value_right != empty_node_symbol){
-                front_node->right = new TreeNode<T>();//创建右节点对象
-                front_node->right->value = value_right;
-                front_node->right->left = NULL;
-                front_node->right->right = NULL;
-                Q.push(front_node->right);//右节点入队
+            Q_nodes.push(leaf->left);
+
+            index++;
+            if ((nodeValues[index] == empty_node_symbol) || index >= nodeValues.size()) { //  empty node and no data also means empty node
+                leaf->right = NULL;
+            } else {
+                leaf->right = new TreeNode<T>(nodeValues[index]);
             }
+
+            Q_nodes.push(leaf->right);
         }
-        Q.pop();//队头，即root节点出队
     }
-
-    std::cout<<"create binary tree seccessfull !"<<std::endl;
-    return true;
 }
 
 template <class T>
@@ -328,5 +316,10 @@ void BinaryTree<T>::allPaths_recursive(TreeNode<T> *root, stack<TreeNode<T>*> no
 
 template <class T>
 int BinaryTree<T>::getWidth(TreeNode<T> *root) {
+
+}
+
+template <class T>
+bool BinaryTree<T>::is_full_binary_tree(TreeNode<T> *root) {
 
 }

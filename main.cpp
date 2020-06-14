@@ -84,9 +84,9 @@ void test_ndarray(){
 
 int main() {
 
-    //test_binarytree();
+    test_binarytree();
 
-    test_ndarray();
+    //test_ndarray();
     std::cout << "Hello, World!" << std::endl;
     return 0;
 }

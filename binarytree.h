@@ -19,6 +19,7 @@ struct TreeNode{
     T value;
     TreeNode<T>* left;
     TreeNode<T>* right;
+    TreeNode(const T x) : value(x), left(NULL), right(NULL) {}
 };
 
 enum VISIT_TYPE{
@@ -53,6 +54,8 @@ public:
 
     void allPaths_recursive(TreeNode<T> *root, stack<TreeNode<T>*> nodes);
 
+    bool is_full_binary_tree(TreeNode<T>* root);
+
 public:
     TreeNode<T>* root;
 private:
@@ -69,5 +72,14 @@ private:
 
 template class BinaryTree<std::string>;
 template class BinaryTree<int>;
+
+
+template <class T>
+class AVLTree : public BinaryTree<T>{
+public:
+    AVLTree();
+    ~AVLTree();
+
+};
 
 #endif //ALGORITHMS_BINARYTREE_HPP
