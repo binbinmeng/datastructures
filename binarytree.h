@@ -73,13 +73,4 @@ private:
 template class BinaryTree<std::string>;
 template class BinaryTree<int>;
 
-
-template <class T>
-class AVLTree : public BinaryTree<T>{
-public:
-    AVLTree();
-    ~AVLTree();
-
-};
-
 #endif //ALGORITHMS_BINARYTREE_HPP

@@ -7,6 +7,6 @@ set(LINK_DIR ./thirdparty/spdlog/build)
 
 #add_library(spdlog archive.cpp zip.cpp lzma.cpp)
 
-add_executable(algorithms main.cpp binarytree.cpp binarytree.h ndarray.cpp ndarray.h)
+add_executable(algorithms main.cpp binarytree.cpp binarytree.h ndarray.cpp ndarray.h backtracking.cpp backtracking.h linkedlist.cpp linkedlist.h avltree.cpp avltree.h graph.cpp graph.h hashtable.cpp hashtable.h arraystack.cpp arraystack.h liststack.cpp liststack.h arrayqueue.cpp arrayqueue.h)
 
 #target_link_libraries(algorithms spdlog)
