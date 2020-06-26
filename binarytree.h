@@ -12,7 +12,12 @@
 #include "stack"
 #include <set>
 #include "assert.h"
+#include "spdlog/spdlog.h"
 using namespace std;
+using namespace spdlog;
+
+#define LOG(fmt,...) \
+    printf("%s(%d)-<%s>: \n"##fmt, __FILE__, __LINE__, __FUNCTION__, ##__VA_ARGS__)
 
 template <class T>
 struct TreeNode{

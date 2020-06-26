@@ -14,6 +14,11 @@
 #include "assert.h"
 using namespace std;
 
+enum CONSTRUTE_TYPE{
+    head_type = 0,
+    tail_type = 1,
+};
+
 template <class T>
 struct Node{
     T value;
@@ -24,11 +29,20 @@ struct Node{
 template <class T>
 class LinkedList {
 public:
-    void create();
+    LinkedList();
+    ~LinkedList();
+    LinkedList(const LinkedList<T> &linked_list);
+    LinkedList<T>& operator = (const LinkedList<T> linked_list);
+    void create(vector<T>& value, enum  CONSTRUTE_TYPE type);
     void destroy();
+    void print() const ;
 
-private:
-    Node<T> head;
+    void reverse(Node<T>* head);
+
+    void create_recurrent_list(Node<T>* head);
+
+public:
+    Node<T> *head_m;
 
 };
 

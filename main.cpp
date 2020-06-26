@@ -1,6 +1,7 @@
 #include <iostream>
 #include "binarytree.h"
 #include "ndarray.h"
+#include "linkedlist.h"
 
 void test_binarytree(){
     std::vector<std::string> values;
@@ -66,27 +67,71 @@ void test_binarytree(){
 }
 
 void test_ndarray(){
-    std::vector<std::vector<std::string>> vec_2d;
-    std::string A1[] = { "A","B","C","D","E"};
+    /*std::vector<std::vector<std::string>> vec_2d;
+    std::string A1[] = { "1","2","3","4","5"};
     vec_2d.push_back(vector<std::string>(A1, A1+5));
-    std::string A2[] = { "F","G","H","I","J"};
+    std::string A2[] = { "3","4","5","6","7"};
     vec_2d.push_back(vector<std::string>(A2, A2+5));
-    std::string A3[] = { "K","L","M","N","O"};
+    std::string A3[] = { "4","6","7","8","1O"};
     vec_2d.push_back(vector<std::string>(A3, A3+5));
 
     std::cout<<"########"<<std::endl;
     NDArray<std::string> array;
     array.create(vec_2d);
     array.print();
+    vector<std::string> target;
+    target.push_back("A");
+    target.push_back("B");
+    target.push_back("G");
+    target.push_back("H");
+    target.push_back("M");
+    target.push_back("N");
+    target.push_back("O");
+    bool result = array.word_searh(vec_2d,target);
+    std::cout<<result<<std::endl;
+*/
+    std::vector<std::vector<int>> vec_2d_int;
+    int B1[] = { 1, 2, 3, 4, 5};
+    vec_2d_int.push_back(vector<int>(B1, B1+5));
+    int B2[] = { 3, 4, 5, 6, 7};
+    vec_2d_int.push_back(vector<int>(B2, B2+5));
+    int B3[] = { 4, 6, 7, 8, 10};
+    vec_2d_int.push_back(vector<int>(B3, B3+5));
 
+    NDArray<int> ndarray_int;
+    ndarray_int.create(vec_2d_int);
+    ndarray_int.print();
+    bool isFind = ndarray_int.find_target(vec_2d_int, 1);
+    std::cout<<isFind<<std::endl;
 
 }
 
+void test_list(){
+    vector<string> values;
+    values.push_back("A");
+    values.push_back("B");
+    values.push_back("C");
+    values.push_back("D");
+    values.push_back("E");
+
+    LinkedList<std::string> str_list;
+    str_list.create(values, CONSTRUTE_TYPE::head_type);
+    str_list.print();
+
+    str_list.reverse(str_list.head_m);
+    str_list.print();
+
+    str_list.create_recurrent_list(str_list.head_m);
+    str_list.print();
+
+}
 int main() {
 
-    test_binarytree();
+    //test_binarytree();
 
     //test_ndarray();
+
+    test_list();
     std::cout << "Hello, World!" << std::endl;
     return 0;
 }

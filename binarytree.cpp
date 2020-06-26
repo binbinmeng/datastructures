@@ -6,16 +6,18 @@
 
 template <class T>
 BinaryTree<T>::BinaryTree(){
-
+    LOG();
 }
 
 template <class T>
 BinaryTree<T>::~BinaryTree(){
+    LOG();
 
 }
 
 template <class T>
 bool BinaryTree<T>::createTree(const vector<T> &nodeValues, const T & empty_node_symbol) {
+    LOG();
     /*
      * 利用层序遍历创建二叉树
      */
@@ -57,6 +59,7 @@ bool BinaryTree<T>::createTree(const vector<T> &nodeValues, const T & empty_node
 
 template <class T>
 void BinaryTree<T>::visitTree(enum VISIT_TYPE type) {
+    LOG();
     switch (type) {
         case 0:
             preOrder_recursive(root);
@@ -87,6 +90,7 @@ void BinaryTree<T>::visitTree(enum VISIT_TYPE type) {
 }
 template <class T>
 void BinaryTree<T>::preOrder_recursive(TreeNode<T> *root) {
+    LOG();
     if(root == NULL)
         return;
 
@@ -96,6 +100,7 @@ void BinaryTree<T>::preOrder_recursive(TreeNode<T> *root) {
 }
 template <class T>
 void BinaryTree<T>::inOrder_recursive(TreeNode<T> *root) {
+    LOG();
     if(root == NULL)
         return;
 
@@ -106,6 +111,7 @@ void BinaryTree<T>::inOrder_recursive(TreeNode<T> *root) {
 
 template <class T>
 void BinaryTree<T>::postOrder_recursive(TreeNode<T> *root) {
+    LOG();
     if(root == NULL)
         return;
 
@@ -116,6 +122,7 @@ void BinaryTree<T>::postOrder_recursive(TreeNode<T> *root) {
 
 template <class T>
 void BinaryTree<T>::level_unrecursive(TreeNode<T> *root) {
+    LOG();
     if(root == NULL)
         return;
 
@@ -139,6 +146,7 @@ void BinaryTree<T>::level_unrecursive(TreeNode<T> *root) {
 
 template <class T>
 void BinaryTree<T>::preOrder_unrecursive_method1(TreeNode<T> *root) {
+    LOG();
     if(root == NULL)
         return;
     stack<TreeNode<T>*> S;
@@ -158,6 +166,7 @@ void BinaryTree<T>::preOrder_unrecursive_method1(TreeNode<T> *root) {
 }
 template <class T>
 void BinaryTree<T>::preOrder_unrecursive_method2(TreeNode<T> *root) {
+    LOG();
     if(root == NULL)
         return;
     stack<TreeNode<T>*> S;
@@ -181,6 +190,7 @@ void BinaryTree<T>::preOrder_unrecursive_method2(TreeNode<T> *root) {
 
 template <class T>
 void BinaryTree<T>::inOrder_unrecursive(TreeNode<T> *root) {
+    LOG();
     if(root == NULL)
         return;
 
@@ -220,6 +230,7 @@ void BinaryTree<T>::postOrder_unrecursive(TreeNode<T> *root) {
 
 template <class T>
 int BinaryTree<T>::getHight(TreeNode<T> *root) {
+    LOG();
     if(root == NULL)
         return 0;
 
@@ -231,6 +242,7 @@ int BinaryTree<T>::getHight(TreeNode<T> *root) {
 
 template <class T>
 void BinaryTree<T>::imageTree_recursive(TreeNode<T> *root) {
+    LOG();
     if(root == NULL)
         return;
 
@@ -244,6 +256,7 @@ void BinaryTree<T>::imageTree_recursive(TreeNode<T> *root) {
 
 template <class T>
 void BinaryTree<T>::imageTree_unrecursive(TreeNode<T> *root) {
+    LOG();
     if(root == NULL)
         return;
 
@@ -266,7 +279,8 @@ void BinaryTree<T>::imageTree_unrecursive(TreeNode<T> *root) {
 
 template <class T>
 void BinaryTree<T>::allPaths(TreeNode<T> *root, std::vector<std::set<TreeNode<T> *>> &paths) {
-     if(root == NULL){
+    LOG();
+    if(root == NULL){
          paths.clear();
          return;
      }
