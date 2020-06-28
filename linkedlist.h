@@ -39,6 +39,8 @@ public:
 
     void reverse(Node<T>* head);
 
+    void reverse_by_K(Node<T>* head, const int K);
+
     void create_recurrent_list(Node<T>* head);
 
 public:

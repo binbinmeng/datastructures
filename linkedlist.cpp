@@ -132,3 +132,8 @@ void LinkedList<T>::destroy() {
         }
     }
 }
+
+template <class T>
+void LinkedList<T>::reverse_by_K(Node<T> *head, const int K) {
+
+}
