@@ -115,15 +115,16 @@ void test_list(){
     values.push_back("E");
 
     LinkedList<std::string> str_list;
-    str_list.create(values, CONSTRUTE_TYPE::head_type);
+    str_list.create(values, CONSTRUT_TYPE::head_type);
     str_list.print();
 
     str_list.reverse(str_list.head_m);
     str_list.print();
 
-    str_list.create_recurrent_list(str_list.head_m);
+    //str_list.create_recurrent_list(str_list.head_m);
+    //str_list.print();
+    str_list.reverse_by_K(str_list.head_m,1);
     str_list.print();
-
 }
 int main() {
 
