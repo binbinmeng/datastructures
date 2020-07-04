@@ -117,18 +117,28 @@ void test_list(){
     values.push_back("C");
     values.push_back("D");
     values.push_back("E");
+    values.push_back("F");
+    values.push_back("G");
+    values.push_back("H");
+    values.push_back("I");
+    values.push_back("G");
 
     LinkedList<std::string> str_list;
     str_list.create(values, CONSTRUT_TYPE::head_type);
-    str_list.print();
+    str_list.print(str_list.head_m);
 
     str_list.reverse(str_list.head_m);
-    str_list.print();
+    str_list.print(str_list.head_m);
 
-    //str_list.create_recurrent_list(str_list.head_m);
-    //str_list.print();
-    str_list.reverse_by_K(str_list.head_m,1);
-    str_list.print();
+    str_list.create_recurrent_list(str_list.head_m);
+    str_list.josephus_ring(str_list.head_m,2);
+
+    //Node<string> * new_head_1 = str_list.reverse_recursive_method1(str_list.head_m, NULL);
+    //str_list.print(new_head_1);
+
+    //Node<string> * new_head_2 = str_list.reverse_recursive_method2(str_list.head_m);
+    //str_list.print(new_head_2);
+
 }
 int main() {
 

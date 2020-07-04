@@ -6,12 +6,13 @@
 
 template <class T>
 LinkedList<T>::LinkedList() {
-
+     head_m = NULL;
 }
 
 template <class T>
 LinkedList<T>::~LinkedList() {
-    //destroy();
+    if(head_m != NULL)
+        delete head_m;
 }
 
 template <class T>
@@ -58,15 +59,28 @@ void LinkedList<T>::print() const {
     std::cout<<std::endl;
 }
 
+template<class T>
+void LinkedList<T>::print(Node<T> *head) const {
+    if(head == NULL)
+        return;
+
+    Node<T>* p = head;
+    while(p != NULL){
+        std::cout<<p->value<<" | ";
+        p = p->next;
+    }
+    std::cout<<std::endl;
+}
+
 template <class T>
 void LinkedList<T>::reverse(Node<T>* head) {
     if (head_m == NULL)
-        return;
+        return ;
 
     Node<T> *cur = head_m;
     Node<T> *post = cur->next;
     Node<T> *pre = NULL;
-    switch (1) {
+    switch (2) {
         /* 利用head指针作，动态调整指向拆分前后两个list，p,q分别指向前后两个指针的头部节点
           input: A->B->C->D->E->F->NULL
           NULL(pre) A(cur)->B(post)->C->D->E->F->NULL
@@ -88,14 +102,14 @@ void LinkedList<T>::reverse(Node<T>* head) {
         }
         case 2: {
             /*
-             * 利用一个list, 动态从后面的list的头拿掉，指向最开始（循环指向）,p 指针的位置不变
+             * 利用一个list, 动态从后面的list的头拿掉，指向最开始（循环指向）,cur 指针的位置不变
              * A(head/p) ->B(q) ->C ->D ->E->F
              * 1. B(head) ->A(p) ->C(q) ->D ->E ->F
              * 2. C(head) ->B ->A(p) ->D(q) ->E ->F
              * 3. D(head) ->C ->B ->A(p) ->E(q) ->F
              * 4. E(head) ->D ->C(p) ->B(q) ->A(p) ->F(q)
              */
-            while (cur != NULL) {
+            while (post != NULL) {
                 cur->next = post->next;
                 post->next = head_m;
                 head_m = post;
@@ -103,7 +117,44 @@ void LinkedList<T>::reverse(Node<T>* head) {
             }
             break;
         }
+        case 3:{
+            head_m = reverse_recursive_method1(head,NULL);
+            break;
+        }
+        default:
+            break;
     }
+}
+
+template<class T>
+Node<T> * LinkedList<T>::reverse_recursive_method1(Node<T> *head, Node<T> *prev) {
+    /*
+     * 如何理解？首先看递归条件就是剩余最后两个元素时，完成反向指向动作，返回最后一个元素（结束时的head指向元素），
+     * 它就是递归函数返回值的last,即last指向元素就是原来列表最后一个元素
+     * 依次回溯操作：后一个元素指向前一个元素
+     */
+    if(head->next == NULL){
+        head->next = prev;
+        return head;
+    }
+
+    Node<T> *last = reverse_recursive_method1(head->next,head);
+    head->next = prev;
+    return last;
+}
+
+template<class T>
+Node<T> * LinkedList<T>::reverse_recursive_method2(Node<T> *head) {
+    if(head->next == NULL){
+        return head;
+    }
+
+    Node<T> *prev = head;//record history node
+    Node<T> * cur = head->next;
+    Node<T> *last = reverse_recursive_method2(cur);
+    cur->next = prev;//current node 指向 history node
+    head->next = NULL; //last step
+    return last;
 }
 
 template <class T>
@@ -127,21 +178,27 @@ void LinkedList<T>::destroy() {
 }
 
 template <class T>
-void LinkedList<T>::reverse_by_K(Node<T> *head, const int K) {
+Node<T> * LinkedList<T>::reverse_by_K(Node<T> *head, Node<T> *prev, const int K) {
+
+}
+
+template<class T>
+void LinkedList<T>::josephus_ring(Node<T> *head, const int num) {
     if(head == NULL)
         return;
-    Node<T> *p = head_m;
-    Node<T> *q = p->next;
-    int step =0;
-    while(p->next != NULL){
-        p->next = q->next;
-        q->next = head_m;
 
-        head_m = q;
-        q = p->next;
-        step++;
-        if(step == K){
-
+    Node<T> * p = head;
+    while(p->next != p){
+        for(int k=0; k<num-1; ++k){
+            p=p->next;
         }
+        Node<T> *temp = p->next;
+        p->next = p->next->next;
+        std::cout<<temp->value<<" | ";
+        delete temp;
+        p=p->next;
     }
+    std::cout<<p->value<<std::endl;
+    std::cout<<"last node is "<<p->value<<std::endl;
+    delete p;
 }

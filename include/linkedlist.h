@@ -35,13 +35,16 @@ public:
     LinkedList<T>& operator = (const LinkedList<T> linked_list);
     void create(vector<T>& value, enum  CONSTRUT_TYPE type);
     void destroy();
-    void print() const ;
+    void print() const;
+    void print(Node<T>* head) const;
 
     void reverse(Node<T>* head);
-
-    void reverse_by_K(Node<T>* head, const int K);
+    Node<T> *reverse_recursive_method1(Node<T>* head,Node<T>* prev);
+    Node<T> *reverse_recursive_method2(Node<T>* head);
+    Node<T> *reverse_by_K(Node<T>* head, Node<T> *prev, const int K);
 
     void create_recurrent_list(Node<T>* head);
+    void josephus_ring(Node<T> *head, const int num);
 
 public:
     Node<T> *head_m;
