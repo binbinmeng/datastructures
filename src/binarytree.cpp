@@ -330,10 +330,10 @@ void BinaryTree<T>::allPaths_recursive(TreeNode<T> *root, stack<TreeNode<T>*> no
 
 template <class T>
 int BinaryTree<T>::getWidth(TreeNode<T> *root) {
-
+    return -1;
 }
 
 template <class T>
 bool BinaryTree<T>::is_full_binary_tree(TreeNode<T> *root) {
-
+    return false;
 }

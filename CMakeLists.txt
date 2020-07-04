@@ -3,7 +3,7 @@ project(src)
 
 set(CMAKE_CXX_STANDARD 14)
 
-find_package(spdlog)
+#find_package(spdlog)
 #[[find_package(LLVM REQUIRED CONFIG)
 message(STATUS "Found LLVM ${LLVM_PACKAGE_VERSION}")
 message(STATUS "Using LLVMConfig.cmake in: ${LLVM_DIR}")
@@ -41,4 +41,4 @@ set(SRC_FILES
       src/arrayqueue.h)
 add_executable(algorithms main.cpp ${SRC_FILES} ${INCLUDE_FILES})
 
-target_link_libraries(algorithms spdlog)# ${llvm_libs})
+#target_link_libraries(algorithms spdlog)# ${llvm_libs})

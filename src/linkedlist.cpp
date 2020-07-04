@@ -63,34 +63,27 @@ void LinkedList<T>::reverse(Node<T>* head) {
     if (head_m == NULL)
         return;
 
-    Node<T> *p = head_m;
-    Node<T> *q = p->next;
+    Node<T> *cur = head_m;
+    Node<T> *post = cur->next;
+    Node<T> *pre = NULL;
     switch (1) {
         /* 利用head指针作，动态调整指向拆分前后两个list，p,q分别指向前后两个指针的头部节点
-        * A ->B ->C ->D ->E->F
-        * 1: A(head/p) ->B(q) ->C ->D ->E ->F
-        * 2: A(head/p) | B(q) ->C ->D ->E- >F
-        * 3: A(head) | B(p) ->C(q) ->D ->E- >F
-        * 4: A(head)<- B(p) | C(q) ->D ->E ->F
-        * 5: A<- B(head) | C(p) ->D(q) ->E ->F
-        * 6: A<- B(head)<- C(p) | D(q) ->E ->F
-        * 7: A<- B<- C(head) | D(p) ->E(q) ->F
+          input: A->B->C->D->E->F->NULL
+          NULL(pre) A(cur)->B(post)->C->D->E->F->NULL
+          NULL<-A(pre)  B(cur)->C(post)->D->E->F->NULL
+          NULL<-A<-B(pre) C(cur)->D(post)->E->F->NULL
         */
         case 1: {
-            head_m->next = NULL;
-            p = q;
-            q = q->next;
-            std::cout<<"finish processing first node"<<std::endl;
-
-            while (q != NULL) {
-                p->next = head_m;
-                head_m = p;
-                p = q;
-                q = q->next;
+            while (post->next != NULL) {
+                cur->next = pre;
+                pre = cur;
+                cur = post;
+                post = post->next;
             }
-            p->next = head_m;
-            head_m = p;
-            std::cout<<"finish processing last node"<<std::endl;
+            /*when NULL<-A<-B<-C<-D(pre)  E(cur)->F(post)->NULL do following:*/
+            cur->next = pre;
+            post->next = cur;
+            head_m = post;
             break;
         }
         case 2: {
@@ -102,11 +95,11 @@ void LinkedList<T>::reverse(Node<T>* head) {
              * 3. D(head) ->C ->B ->A(p) ->E(q) ->F
              * 4. E(head) ->D ->C(p) ->B(q) ->A(p) ->F(q)
              */
-            while (q != NULL) {
-                p->next = q->next;
-                q->next = head_m;
-                head_m = q;
-                q = p->next;
+            while (cur != NULL) {
+                cur->next = post->next;
+                post->next = head_m;
+                head_m = post;
+                post = cur->next;
             }
             break;
         }
