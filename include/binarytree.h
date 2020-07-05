@@ -23,7 +23,8 @@ struct TreeNode{
     T value;
     TreeNode<T>* left;
     TreeNode<T>* right;
-    TreeNode(const T x) : value(x), left(NULL), right(NULL) {}
+    bool visited;
+    TreeNode(const T x) : value(x), visited(false), left(NULL), right(NULL) {}
 };
 
 enum VISIT_TYPE{
@@ -56,7 +57,7 @@ public:
 
     void allPaths(TreeNode<T> *root, std::vector<std::set<TreeNode<T> *>>& paths);
 
-    void allPaths_recursive(TreeNode<T> *root, stack<TreeNode<T>*> nodes);
+    void allPaths_recursive(TreeNode<T> *root, vector<T>& path, vector<vector<T>>& paths);
 
     bool is_full_binary_tree(TreeNode<T>* root);
 

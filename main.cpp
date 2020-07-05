@@ -13,7 +13,7 @@ void test_binarytree(){
     //values.push_back("#");
     values.push_back("B");
     values.push_back("C");
-    //values.push_back("#");
+    values.push_back("#");
     values.push_back("D");
     //values.push_back("#");
     values.push_back("E");
@@ -63,10 +63,18 @@ void test_binarytree(){
             cout<<(*it)->value<<" | "<<endl;
         }
     }
-
-    stack<TreeNode<string>*> nodes;
-    bt.allPaths_recursive(bt.root, nodes);
-    std::cout<<nodes.size()<<std::endl;
+    std::cout << "binary tree path recursive method = "<< std::endl;
+    vector<string> path;
+    vector<vector<string>> allpaths;
+    bt.allPaths_recursive(bt.root, path, allpaths);
+    std::cout<<"path number = "<<allpaths.size()<<std::endl;
+    for(int k=0; k<allpaths.size();++k)
+    {
+        for(int t=0; t<allpaths[k].size();++t){
+            std::cout<<allpaths[k][t]<<" | ";
+        }
+        std::cout<<std::endl;
+    }
 
 }
 
@@ -130,8 +138,10 @@ void test_list(){
     str_list.reverse(str_list.head_m);
     str_list.print(str_list.head_m);
 
-    str_list.create_recurrent_list(str_list.head_m);
-    str_list.josephus_ring(str_list.head_m,2);
+    str_list.reverse_print(str_list.head_m);
+
+    //str_list.create_recurrent_list(str_list.head_m);
+    //str_list.josephus_ring(str_list.head_m,2);
 
     //Node<string> * new_head_1 = str_list.reverse_recursive_method1(str_list.head_m, NULL);
     //str_list.print(new_head_1);
@@ -142,11 +152,11 @@ void test_list(){
 }
 int main() {
 
-    //test_binarytree();
+    test_binarytree();
 
     //test_ndarray();
 
-    test_list();
+    //test_list();
     std::cout << "Hello, World!" << std::endl;
     return 0;
 }

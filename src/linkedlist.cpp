@@ -157,6 +157,14 @@ Node<T> * LinkedList<T>::reverse_recursive_method2(Node<T> *head) {
     return last;
 }
 
+template<class T>
+void LinkedList<T>::reverse_print(Node<T> *head) {
+     if(head == NULL)
+         return;
+     reverse_print(head->next);
+     std::cout<<head->value<<std::endl;
+}
+
 template <class T>
 void LinkedList<T>::create_recurrent_list(Node<T>* head) {
     Node<T>* p = head_m;

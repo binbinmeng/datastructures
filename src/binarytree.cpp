@@ -55,6 +55,7 @@ bool BinaryTree<T>::createTree(const vector<T> &nodeValues, const T & empty_node
             Q_nodes.push(leaf->right);
         }
     }
+    return true;
 }
 
 template <class T>
@@ -284,48 +285,34 @@ void BinaryTree<T>::allPaths(TreeNode<T> *root, std::vector<std::set<TreeNode<T>
          paths.clear();
          return;
      }
-
-    stack<TreeNode<T>*> S;
-    TreeNode<T>* current_node = root;
-
-    std::set<TreeNode<T>*> path;
-
-    while(current_node != NULL || !S.empty()){
-
-        while(current_node != NULL){
-            S.push(current_node);
-
-            if(current_node->left == NULL && current_node->right == NULL){
-                stack<TreeNode<T>*> S_COPY = S;
-                while(!S_COPY.empty()){
-                    path.insert(S_COPY.top());
-                    S_COPY.pop();
-                }
-
-                paths.push_back(path);
-                path.clear();
-            }
-            current_node = current_node->left;
-        }
-
-        if(!S.empty()){
-
-            current_node = S.top();
-            S.pop();
-            current_node = current_node->right;
-
-            if(!S.empty()) {
-                path.insert(S.top());
-            }
-        }
-    }
+    //TO DO
 }
 
 template <class T>
-void BinaryTree<T>::allPaths_recursive(TreeNode<T> *root, stack<TreeNode<T>*> nodes) {
-    if(root == NULL)
+void BinaryTree<T>::allPaths_recursive(TreeNode<T> *root, vector<T>& path, vector<vector<T>>& paths) {
+    if(root->left == NULL && root->right == NULL){
+        path.push_back(root->value);
+        paths.push_back(path);
+
         return;
-    //TO DO
+    }
+    if(root->left){
+        if(!root->visited) {
+            path.push_back(root->value);/*顺序压入vector的元素,如果root节点开始*/
+        }
+        root->visited = true;
+        allPaths_recursive(root->left,path, paths);
+        path.pop_back();/*回溯弹出vector的元素,支持root节点*/
+    }
+    if(root->right){
+
+        if(!root->visited) {
+            path.push_back(root->value);/*顺序压入vector的元素,如果未被访问过的节点开始*/
+        }
+        root->visited = true;
+        allPaths_recursive(root->right,path, paths);
+        path.pop_back();/*回溯弹出vector的元素,支持root节点*/
+    }
 }
 
 template <class T>
