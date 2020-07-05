@@ -13,7 +13,7 @@ void test_binarytree(){
     //values.push_back("#");
     values.push_back("B");
     values.push_back("C");
-    values.push_back("#");
+    //values.push_back("#");
     values.push_back("D");
     //values.push_back("#");
     values.push_back("E");
@@ -76,6 +76,7 @@ void test_binarytree(){
         std::cout<<std::endl;
     }
 
+    std::cout<<bt.is_full_binary_tree(bt.root)<<std::endl;
 }
 
 void test_ndarray(){

@@ -322,5 +322,15 @@ int BinaryTree<T>::getWidth(TreeNode<T> *root) {
 
 template <class T>
 bool BinaryTree<T>::is_full_binary_tree(TreeNode<T> *root) {
-    return false;
+    /*
+     * 完全二叉树的判定
+     */
+    if(root->left == NULL&& root->right !=NULL){
+        return false;
+    }
+    if(root->left != NULL&& root->right !=NULL) {
+
+        return (is_full_binary_tree(root->left) && is_full_binary_tree(root->right));
+    }
+    return true;
 }
