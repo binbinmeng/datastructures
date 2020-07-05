@@ -8,6 +8,7 @@
 #include "linkedlist.h"
 
 void test_binarytree(){
+
     std::vector<std::string> values;
     values.push_back("A");
     //values.push_back("#");
