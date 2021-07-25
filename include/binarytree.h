@@ -1,81 +1,41 @@
-//
-// Created by binbinm on 2020/6/13.
-//
-
-#ifndef ALGORITHMS_BINARYTREE_HPP
-#define ALGORITHMS_BINARYTREE_HPP
+#ifndef BINARYTREE_H
+#define BINARYTREE_H
 #include <iostream>
-#include "string.h"
-#include "vector"
-#include "map"
-#include "queue"
-#include "stack"
-#include <set>
-#include "assert.h"
-
+#include <queue>
+#include <stack>
+#include <map>
 using namespace std;
 
-#define LOG(fmt,...) \
-    printf("%s(%d)-<%s>: \n"##fmt, __FILE__, __LINE__, __FUNCTION__, ##__VA_ARGS__)
-
 template <class T>
-struct TreeNode{
+struct TreeNode
+{
     T value;
-    TreeNode<T>* left;
-    TreeNode<T>* right;
-    bool visited;
-    TreeNode(const T x) : value(x), visited(false), left(NULL), right(NULL) {}
-};
-
-enum VISIT_TYPE{
-  pre_recursive = 0,
-  in_recursive = 1,
-  post_recursive = 2,
-  pre_unrecursive = 3,
-  in_unrecursive = 4,
-  post_unrecursive = 5,
-  level_unrecursive =6,
+    TreeNode<T> *left;
+    TreeNode<T> *right;
+    int visited_num;
+    TreeNode(T data) : value(data), left(NULL), right(NULL), visited_num(0) {}
 };
 
 template <class T>
-class BinaryTree {
+class BinaryTree
+{
 public:
     BinaryTree();
-    ~BinaryTree();
+    BinaryTree(TreeNode<T> *node);
+    void PreOrder();
+    void InOrder();
+    void PostOrder();
+    void LevelOrder();
 
-    bool createTree(const vector<T> &nodeValues,const T & empty_node_symbol);
+    int Hight(TreeNode<T>* root);
+    void ImageTree(TreeNode<T>* root);
+    int SpecificPath(int sum); 
+    void AllPath();
+    
 
-    void visitTree(enum VISIT_TYPE);
-
-    int getHight(TreeNode<T>* root);
-
-    int getWidth(TreeNode<T>* root);
-
-    void imageTree_recursive(TreeNode<T>* root);
-
-    void imageTree_unrecursive(TreeNode<T>* root);
-
-    void allPaths(TreeNode<T> *root, std::vector<std::set<TreeNode<T> *>>& paths);
-
-    void allPaths_recursive(TreeNode<T> *root, vector<T>& path, vector<vector<T>>& paths);
-
-    bool is_full_binary_tree(TreeNode<T>* root);
-
-public:
-    TreeNode<T>* root;
 private:
-    void preOrder_recursive(TreeNode<T>* root);
-    void inOrder_recursive(TreeNode<T>* root);
-    void postOrder_recursive(TreeNode<T>* root);
-    void level_unrecursive(TreeNode<T>* root);
-    void preOrder_unrecursive_method1(TreeNode<T>* root);
-    void preOrder_unrecursive_method2(TreeNode<T>* root);
-    void inOrder_unrecursive(TreeNode<T>* root);
-    void postOrder_unrecursive(TreeNode<T>* root);
-
+    TreeNode<T> *root;
 };
 
-template class BinaryTree<std::string>;
 template class BinaryTree<int>;
-
-#endif //ALGORITHMS_BINARYTREE_HPP
+#endif // BINARYTREE_H
