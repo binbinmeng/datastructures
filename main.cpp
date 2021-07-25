@@ -70,6 +70,6 @@ int test_sort(){
 int main()
 {
     //test_linkedlist();
-    //test_binarytree();
+    test_binarytree();
     test_sort();
 }

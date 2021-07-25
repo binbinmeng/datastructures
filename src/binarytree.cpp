@@ -148,7 +148,7 @@ void BinaryTree<T>::LevelOrder()
             {
                 tree_node_queue.push(front_node->left);
             }
-            if (front_node->left != NULL)
+            if (front_node->right != NULL)
             {
                 tree_node_queue.push(front_node->right);
             }
