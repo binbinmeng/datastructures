@@ -20,11 +20,13 @@ include_directories (${CMAKE_SOURCE_DIR}/include)
 set(SRC_FILES
      src/linkedlist.cpp
      src/binarytree.cpp
-     src/sort.cpp)
+     src/sort.cpp
+     src/search.cpp)
  set(INCULDE_FILES
      include/linkedlist.h
      include/binarytree.h
-     include/sort.h)
+     include/sort.h
+     include/search.h)
 add_executable(algorithms main.cpp ${SRC_FILES} ${INCLUDE_FILES})
 
 #target_link_libraries(algorithms spdlog)# ${llvm_libs})

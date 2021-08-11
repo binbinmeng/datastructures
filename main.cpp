@@ -1,6 +1,7 @@
 #include "linkedlist.h"
 #include "binarytree.h"
 #include "sort.h"
+#include "search.h"
 #include "iostream"
 using namespace std;
 
@@ -63,13 +64,22 @@ int test_sort(){
     int data[] = {2,3,5,1,9,6,4,8,7};
     SortFactory<int> sortfactory(data, 9);
     sortfactory.Print();
-    sortfactory.BublleSort();
+    //sortfactory.BublleSort();
+    sortfactory.InsertSort();
     sortfactory.Print();
 }
 
+int test_search() {
+
+    int data[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+    SearchFactory<int> searchfactory(data, 9);
+    //searchfactory.Print();
+    searchfactory.BinarySearch(10,0,8);
+}
 int main()
 {
     //test_linkedlist();
-    test_binarytree();
-    test_sort();
+    //test_binarytree();
+    //test_sort();
+    test_search();
 }
